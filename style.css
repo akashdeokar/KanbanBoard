@@ -121,3 +121,7 @@
     background-color: aqua;
     padding: 1rem;
 }
+.active{
+    border: 2px solid yellow;
+    border-radius: 2px;
+}
