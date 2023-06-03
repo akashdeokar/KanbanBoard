@@ -1,8 +1,11 @@
 *{
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 .toolbox_cont{
+    position: fixed;
+    top: 0;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -43,4 +46,78 @@
 }
 .green{
     background-color: green;
+}
+.modal-backdrop{
+    display: none;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    background-color: rgb(128,128,128,0.5);
+}
+.modal-body{
+    width: 50vw;
+    height: 50vh;
+    position: absolute;
+    top: 50vh;
+    left: 50vw;
+    transform: translate(-50%,-50%);
+    display: flex;
+}
+.ticket-des{
+    width: 80%;
+    height: 100%;
+    background-color: lightcoral;
+    outline: none;
+    resize: none;
+    border: none;
+    padding: 1rem;
+    font-size: 1.5rem;
+}
+.priority-cont{
+    border-left: 2px solid black;
+    width: 20%;
+    height: 100%;
+    background-color: goldenrod;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.priority-color{
+    width: 70%;
+    height: 3rem;
+}
+.ticket-cont{
+    margin-top: 5rem;
+    background-color: rgb(238, 200, 144);
+    width: 100vw;
+    min-height: 100vh;
+    padding: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+    gap: 1rem;
+}
+.ticket{
+    width: 10rem;
+    height: 12rem;
+    border: 1px solid brown;
+}
+.ticket-priority{
+    width: 100%;
+    height: 10%;
+}
+.ticket-id{
+    width: 100%;
+    height: 10%;
+    background-color: blueviolet;
+    padding-left: 0.5rem;
+}
+.ticket-description{
+    width: 100%;
+    height: 80%;
+    background-color: aqua;
+    padding: 1rem;
 }
