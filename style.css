@@ -1,0 +1,46 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.toolbox_cont{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 5rem;
+    width: 100vw;
+    background-color: brown;
+}
+.filter-cont{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-left: 2rem;
+    height: 3rem;
+    width: 15rem;
+    background-color: grey;
+}
+.button-cont{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-right: 2rem;
+    height: 3rem;
+    width: 10rem;
+    background-color: grey;
+}
+.color{
+    width: 2rem;
+    height: 2rem;
+}
+.red{
+    background-color: red;
+}
+.blue{
+    background-color: blue;
+}
+.pink{
+    background-color: pink;
+}
+.green{
+    background-color: green;
+}
