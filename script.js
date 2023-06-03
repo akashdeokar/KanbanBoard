@@ -4,6 +4,7 @@ let delete_btn = document.querySelector(".delete-btn");
 let ticket_cont = document.querySelector(".ticket-cont");
 let textarea = document.querySelector("textarea");
 let priority_colors = document.querySelectorAll(".priority-cont > .priority-color");
+let filter_colors = document.querySelectorAll(".filter-cont > .color");
 let active_color = "red";
 let delete_status = false
 let modal_status = false
@@ -22,6 +23,10 @@ delete_btn.addEventListener("click",function(){
 textarea.addEventListener("keydown",function(e){
     if(e.key == "Enter"){
         let task = textarea.value;
+        if(task.trim() == ""){
+            alert("Task cannot be Empty !!");
+            return;
+        }
         textarea.value = "";
         modal.style.display = "none";
         modal_status = !modal_status;
@@ -36,6 +41,19 @@ for(let i=0;i<priority_colors.length;i++){
         active_color_box.classList.remove("active");
         e.target.classList.add("active");
         active_color = color;
+    })
+}
+
+for(let i=0;i<filter_colors.length;i++){
+    filter_colors[i].addEventListener("click",function(){
+        let tickets = document.querySelectorAll(".ticket-cont > .ticket");
+        for(let j=0;j<tickets.length;j++){
+            if(filter_colors[i].classList[1] == tickets[j].querySelector(".ticket-priority").classList[1]){
+                tickets[j].style.display = "block";
+            }else{
+                tickets[j].style.display = "none";
+            }
+        }
     })
 }
 
