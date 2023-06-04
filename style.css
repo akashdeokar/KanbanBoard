@@ -67,7 +67,7 @@
 .ticket-des{
     width: 80%;
     height: 100%;
-    background-color: lightcoral;
+    background-color: rgb(238, 200, 144);
     outline: none;
     resize: none;
     border: none;
@@ -78,7 +78,7 @@
     border-left: 2px solid black;
     width: 20%;
     height: 100%;
-    background-color: goldenrod;
+    background-color: brown;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -107,21 +107,35 @@
 }
 .ticket-priority{
     width: 100%;
-    height: 10%;
+    height: 5%;
 }
 .ticket-id{
     width: 100%;
     height: 10%;
-    background-color: blueviolet;
+    background-color: aqua;
     padding-left: 0.5rem;
 }
 .ticket-description{
     width: 100%;
-    height: 80%;
+    height: 70%;
     background-color: aqua;
     padding: 1rem;
+    overflow: auto;
+    word-break: break-all;
+}
+.lock{
+    width: 100%;
+    height: 15%;
+    padding-top: 5%;
+    padding-left: 88%;
+    background-color: aqua;
 }
 .active{
     border: 2px solid yellow;
     border-radius: 2px;
+}
+.modal-body > i{
+    position: absolute;
+    right: -2rem;
+    top: -1rem;
 }
