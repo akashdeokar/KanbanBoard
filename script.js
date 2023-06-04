@@ -11,6 +11,17 @@ let delete_status = false
 let modal_status = false
 let uid = new ShortUniqueId();
 let priority_color_arr = ["red","blue","pink","green"];
+let tickets_arr = []
+let isAddedOnRefresh = false;
+
+tickets_arr = JSON.parse(localStorage.getItem("tickets"));
+if(tickets_arr == null || tickets_arr.length==0){
+    tickets_arr = [];
+}else{
+    isAddedOnRefresh = true;
+    tickets_arr.forEach(ticket => create_ticket(ticket.task,ticket.uid,ticket.active_color));
+    isAddedOnRefresh = false;
+}
 
 function toggle_modal(){
     modal.style.display = modal_status ? "none" : "flex";
@@ -34,7 +45,7 @@ textarea.addEventListener("keydown",function(e){
         textarea.value = "";
         modal.style.display = "none";
         modal_status = !modal_status;
-        create_ticket(task);
+        create_ticket(task , uid() , active_color);
     }
 });
 
@@ -71,11 +82,11 @@ for(let i=0;i<filter_colors.length;i++){
 let modal_close = document.querySelector(".modal-body > i");
 modal_close.addEventListener("click",toggle_modal);
 
-function create_ticket(task){
+function create_ticket(task,uid,active_color){
     let ticket = document.createElement("div");
     ticket.setAttribute("class","ticket");
     ticket.innerHTML = `<div class="ticket-priority ${active_color}"></div>
-                        <div class="ticket-id">#${uid()}</div>
+                        <div class="ticket-id">#${uid}</div>
                         <div class="ticket-description">${task}</div>
                         <div class="lock">
                             <i class="fa-solid fa-lock"></i>
@@ -83,6 +94,9 @@ function create_ticket(task){
     ticket_cont.appendChild(ticket);
     ticket.addEventListener("click",function(){
         if(delete_status){
+            let id = ticket.querySelector(".ticket-id").innerText.replace("#","");
+            tickets_arr = tickets_arr.filter(ticket => ticket.uid != id);
+            updateLocalStorage();
             ticket.remove();
         }
     })
@@ -93,17 +107,37 @@ function create_ticket(task){
             icon.classList.remove("fa-lock");
             icon.classList.add("fa-lock-open");
             ticket_des.setAttribute("contenteditable","true");
-
         }else{
             icon.classList.remove("fa-lock-open");
             icon.classList.add("fa-lock");
             ticket_des.setAttribute("contenteditable","false");
         }
+        let id = ticket.querySelector(".ticket-id").innerText.replace("#","");
+        let idx = tickets_arr.findIndex(ticket => ticket.uid == id);
+        let task = ticket.querySelector(".ticket-description").innerText;
+        tickets_arr[idx].task = task;
+        updateLocalStorage();
     })
     let color = ticket.querySelector(".ticket-priority");
     color.addEventListener("click",function(e){
         let curr_color_idx = priority_color_arr.findIndex(color => color == e.target.classList[1]);
         color.classList.remove(e.target.classList[1]);
         color.classList.add(priority_color_arr[(curr_color_idx+1)%priority_color_arr.length]);
+        
+        let id = ticket.querySelector(".ticket-id").innerText.replace("#","");
+        let idx = tickets_arr.findIndex(ticket => ticket.uid == id);
+        tickets_arr[idx].active_color = color.classList[1];
+        updateLocalStorage();
     })
+    if(!isAddedOnRefresh){
+        tickets_arr.push({"task" : task , "uid" : uid , "active_color" : active_color});
+        updateLocalStorage();
+    }
 }
+
+function updateLocalStorage(){
+    let tickets_arr_str = JSON.stringify(tickets_arr);
+    localStorage.setItem("tickets",tickets_arr_str);
+}
+
+
